@@ -1,0 +1,11 @@
+iterms
+output
+*.pem
+*.swp
+*.srl
+build-etcd/etcd/
+build-kubernetes/kubernetes
+build-kube-router/kube-router
+build-cni/cni
+build-cni-plugins/cni-plugins
+build-coredns/coredns
