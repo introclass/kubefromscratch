@@ -43,6 +43,7 @@ prepare_build_image(){
 	cd $BASEDIR
 	func_docker_image_exist $BUILD_IMAGE
 	if [[ $? == "0" ]];then
+		docker build -t $BUILD_IMAGE $BUILD_IMAGE_DIR
 		return
 	fi
 	dd if=/dev/urandom bs=512 count=1 2>/dev/null | LC_ALL=C tr -dc 'A-Za-z0-9' | dd bs=32 count=1 2>/dev/null >${BUILD_IMAGE_DIR}/rsyncd.password
