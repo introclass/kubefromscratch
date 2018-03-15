@@ -70,7 +70,7 @@ collect_iterm(){
 	func_fatal_cmd func_create_dirs $dir_ca_apiserver $dir_ca_kubelet_client $dir_cert_apiserver_client $dir_cert_kubelet
 
 	local build_kube=../../build-kubernetes
-	local bin_kubelet=${build_kube}/kubernetes/_output/dockerized/bin/linux/amd64/kubelet
+	local bin_kubelet=${build_kube}/kubernetes/_output/local/bin/linux/amd64/kubelet
 	func_fatal_cmd func_force_copy $dir_bin $bin_kubelet
 
 	local build_certs=../../build-certs

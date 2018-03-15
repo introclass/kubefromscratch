@@ -60,11 +60,11 @@ prepare_modify_scripts(){
 	if [[ "$ORI_OSTYPE" == "darwin"* ]];then
 		sed -i "" -e "s/build --pull/build /" ${BASEDIR}/kubernetes/build/lib/release.sh
 		sed -i "" -e "s/--delete \\\/--delete --no-perms \\\/" ${BASEDIR}/kubernetes/build/common.sh
-#		sed -i "" -e "s/kube::build::run_build_command make cross$/kube::build::run_build_command make cross KUBE_STATIC_OVERRIDES=\"kubelet\"/" ${BASEDIR}/kubernetes/build/release.sh
+		sed -i "" -e "s/\(^make.*KUBE_TEST_\)/#\1/" ${BASEDIR}/kubernetes/hack/make-rules/cross.sh
 	else
 		sed -i"" -e "s/build --pull/build /" ${BASEDIR}/kubernetes/build/lib/release.sh
 		sed -i"" -e "s/--delete \\\/--delete --no-perms \\\/" ${BASEDIR}/kubernetes/build/common.sh
-#		sed -i"" -e "s/kube::build::run_build_command make cross$/kube::build::run_build_command make cross KUBE_STATIC_OVERRIDES=\"kubelet\"/" ${BASEDIR}/kubernetes/build/release.sh
+		sed -i"" -e "s/\(^make.*KUBE_TEST_\)/#\1/" ${BASEDIR}/kubernetes/hack/make-rules/cross.sh
 	fi
 	cd $BASEDIR/kubernetes; git add . ;git commit -m "modify build script"
 }
@@ -74,7 +74,7 @@ build(){
 	# don't run test，and just build for linux/amd64
 	# reference kubernetes/Makefile
 	# if OSTYPE is darwin*, will build for darwin
-	make quick-release
+	make quick-release KUBE_RELEASE_RUN_TESTS=n KUBE_FASTBUILD=true
 }
 
 prepare_codes

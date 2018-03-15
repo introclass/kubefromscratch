@@ -66,7 +66,7 @@ collect_iterm(){
 	func_fatal_cmd func_create_dirs $dir_ca_apiserver $dir_cert_apiserver_client
 
 	local build_kube=../../build-kubernetes
-	local bin_kube_scheduler=${build_kube}/kubernetes/_output/dockerized/bin/linux/amd64/kube-scheduler
+	local bin_kube_scheduler=${build_kube}/kubernetes/_output/local/bin/linux/amd64/kube-scheduler
 	func_fatal_cmd func_force_copy $dir_bin $bin_kube_scheduler
 
 	local build_certs=../../build-certs
