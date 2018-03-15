@@ -3,7 +3,7 @@ layout: default
 title: README
 author: lijiaocn
 createdate: 2017/10/16 15:10:14
-changedate: 2017/11/23 10:14:06
+changedate: 2018/03/15 10:19:05
 
 ---
 
@@ -275,7 +275,7 @@ kubernetes集群的master：
 
 生成kubelet使用的证书:
 
-	cd build-certs/kubelet-client
+	cd build-certs/kubelet
 	mkdir -p iterms/{kubelet1.local,kubelet2.local,kubelet3.local}
 	./gen.sh
 
