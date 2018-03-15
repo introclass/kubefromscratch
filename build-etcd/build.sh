@@ -23,7 +23,7 @@ prepare_codes(){
 
 build(){
 	cd ${BASEDIR}
-	docker run --rm -v `pwd`/etcd:/go/src/etcd -w /go/src/etcd golang:1.8.1 /bin/sh -c "./build"
+	docker run --rm -v `pwd`/etcd:/go/src/etcd -w /go/src/etcd golang:1.10 /bin/sh -c "./build"
 }
 prepare_codes
 build
