@@ -9,3 +9,4 @@ build-kube-router/kube-router
 build-cni/cni
 build-cni-plugins/cni-plugins
 build-coredns/coredns
+rsyncd.password
