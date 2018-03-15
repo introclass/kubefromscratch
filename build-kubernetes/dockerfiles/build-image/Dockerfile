@@ -1,4 +1,4 @@
-FROM golang:1.8.3-alpine
+FROM golang:1.9.2-alpine
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/' /etc/apk/repositories
 RUN apk update && apk upgrade
@@ -16,3 +16,14 @@ RUN apk add --no-cache tzdata  \
 
 RUN rm /bin/grep && ln -s /usr/bin/grep /bin/grep
 RUN ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+ENV HOME /go/src/github.com/lijiaocn
+RUN mkdir -p $HOME
+
+ADD rsyncd.password /
+RUN chmod a+r /rsyncd.password
+
+ADD rsyncd.sh /
+RUN chmod a+rx /rsyncd.sh
+
+RUN chmod a+rx /rsyncd.sh
