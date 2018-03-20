@@ -178,8 +178,9 @@ build(){
 		vendor/k8s.io/apiextensions-apiserver
 	)
 	for t in ${targets[@]}
-	do
-		"${docker_cmd[@]}" /bin/sh -c "CGO_ENABLED=0 make all WHAT=$t KUBE_RELEASE_RUN_TESTS=n KUBE_FASTBUILD=true"
+	do  # if disable CGO, will kubelet: cAdvisor is unsupported in this build
+		#"${docker_cmd[@]}" /bin/sh -c "CGO_ENABLED=0 make all WHAT=$t KUBE_RELEASE_RUN_TESTS=n KUBE_FASTBUILD=true"
+		"${docker_cmd[@]}" /bin/sh -c "CGO_ENABLED=1 make all WHAT=$t KUBE_RELEASE_RUN_TESTS=n KUBE_FASTBUILD=true"
 	done
 }
 

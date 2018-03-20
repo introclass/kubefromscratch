@@ -1,20 +1,8 @@
-FROM golang:1.9.2-alpine
+FROM golang:1.8.3-jessie
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/' /etc/apk/repositories
-RUN apk update && apk upgrade
-RUN apk add --no-cache tzdata  \
-	&& apk add --no-cache rsync \
-	&& apk add --no-cache git \
-	&& apk add --no-cache bash \
-	&& apk add --no-cache make \
-	&& apk add --no-cache grep \
-	&& apk add --no-cache findutils \
-	&& apk add --no-cache gcc \
-	&& apk add --no-cache libc-dev \
-	&& apk add --no-cache linux-headers \
-	&& apk add --no-cache coreutils
-
-RUN rm /bin/grep && ln -s /usr/bin/grep /bin/grep
+RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/' /etc/apt/sources.list
+RUN apt-get update 
+RUN apt-get install rsync -y 
 RUN ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 ENV HOME /go/src/github.com/lijiaocn
@@ -24,6 +12,4 @@ ADD rsyncd.password /
 RUN chmod a+r /rsyncd.password
 
 ADD rsyncd.sh /
-RUN chmod a+rx /rsyncd.sh
-
 RUN chmod a+rx /rsyncd.sh
