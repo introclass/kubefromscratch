@@ -84,6 +84,7 @@ ensure_data_container(){
 			--volume /usr/local/go/pkg/darwin_386_cgo
 			--volume /usr/local/go/pkg/windows_amd64_cgo
 			--volume /usr/local/go/pkg/windows_386_cgo
+			--volume /usr/local/go/pkg/linux_amd64
 			--name "${DATA_CONTAINER}"
 			--hostname "${HOSTNAME}"
 			"${BUILD_IMAGE}"
@@ -178,7 +179,7 @@ build(){
 	)
 	for t in ${targets[@]}
 	do
-		"${docker_cmd[@]}" /bin/sh -c "make all WHAT=$t KUBE_RELEASE_RUN_TESTS=n KUBE_FASTBUILD=true"
+		"${docker_cmd[@]}" /bin/sh -c "CGO_ENABLED=0 make all WHAT=$t KUBE_RELEASE_RUN_TESTS=n KUBE_FASTBUILD=true"
 	done
 }
 
