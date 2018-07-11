@@ -3,7 +3,7 @@ layout: default
 title: README
 author: lijiaocn
 createdate: 2017/10/16 15:10:14
-changedate: 2017/11/23 10:14:06
+changedate: 2018/07/11 15:27:54
 
 ---
 
@@ -142,7 +142,7 @@ kubernetes集群的master：
 	mkdir -p iterms/{apiserver1.local,apiserver2.local,apiserver3.local}
 	./gen.sh
 
-生成访问etcd的client证书:
+生成apiserver访问etcd使用的证书:
 
 	cd build-certs/etcd-client
 	mkdir -p iterms/{apiserver1.local,apiserver2.local,apiserver3.local}
@@ -153,7 +153,7 @@ kubernetes集群的master：
 	cd build-certs/serviceAccount
 	./gen.sh
 
-生成访问kubelet使用的证书:
+生成apiserver访问kubelet使用的证书:
 
 	cd build-certs/kubelet-client/
 	mkdir -p iterms/{apiserver1.local,apiserver2.local,apiserver3.local}
@@ -164,7 +164,7 @@ kubernetes集群的master：
 	cd build-certs/kubelet/
 	./gen.sh     //生成ca即可退出
 
-生成访问apiserver的client证书:
+生成controller-manager和kube-scheduler访问apiserver时使用的证书:
 
 	cd build-certs/apiserver-client
 	
@@ -208,7 +208,7 @@ kubernetes集群的master：
 	echo "system:masters"  >iterms/admin.cluster/ORGNIZATION
 	./gen.sh
 
-生成kubectl的部署文件(for admin.cluster):
+为集群管理员生成命令行:
 
 	cd collect/kubectl
 	mkdir -p iterms/{admin.cluster,}
@@ -226,7 +226,7 @@ kubernetes集群的master：
 
 	cd build-coredns; ./build.sh
 
-生成访问apiserver的client证书:
+生成coredns访问apiserver的时使用的证书:
 
 	cd build-certs/apiserver-client
 	mkdir -p iterms/{coredns1.local,coredns2.local,coredns3.local}
@@ -241,7 +241,7 @@ kubernetes集群的master：
 在kubernetes中使用coredns时，需要创建、绑定角色(可以用前面创建的admin.cluster用户操作):
 
 	./kubectl.sh create clusterrole coredns --verb=list,watch --resource=endpoints,services,pods,namespaces 
-	./kubectl.sh create clusterrolebinding coredns --clusterrole=coredns --user=coredns3.local --user=coredns1.local --user=coredns2.local
+	./kubectl.sh create clusterrolebinding coredns --clusterrole=coredns --user=coredns1.local --user=coredns2.local --user=coredns3.local
 
 ## 添加node
 
@@ -279,7 +279,7 @@ kubernetes集群的master：
 	mkdir -p iterms/{kubelet1.local,kubelet2.local,kubelet3.local}
 	./gen.sh
 
-生成用来访问apiserver的证书:
+生成kubelet访问apiserver时使用的证书:
 
 	cd build-certs/apiserver-client
 	mkdir -p iterms/{kubelet1.local,kubelet2.local,kubelet3.local}
@@ -326,7 +326,7 @@ kubernetes集群的master：
 	cd build-kube-router/
 	./build.sh
 
-生成kube-router访问apiserver的client证书:
+生成kube-router访问apiserver时使用的证书:
 
 	cd build-certs/apiserver-client/
 	mkdir -p iterms/{kube-router1.local,kube-router2.local,kube-router3.local}
