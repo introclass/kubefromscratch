@@ -5,7 +5,7 @@ ORI_OSTYPE=$OSTYPE
 export OSTYPE=notdetected 
 BASEDIR=`pwd`
 PROJECT_NAME=kubernetes
-PROJECT_VERSION="v1.8.0"
+PROJECT_VERSION="v1.12.2"
 
 BUILD_IMAGE_DIR=${BASEDIR}/dockerfiles/build-image
 BUILD_IMAGE=${PROJECT_NAME}:build
@@ -171,11 +171,22 @@ build(){
 		cmd/cloud-controller-manager
 		cmd/kubelet
 		cmd/kubeadm
-		cmd/kubectl
-		plugin/cmd/kube-scheduler
-		federation/cmd/kubefed
-		vendor/k8s.io/kube-aggregator
+#		cmd/hyperkube
+		cmd/kube-scheduler
 		vendor/k8s.io/apiextensions-apiserver
+#		cluster/gce/gci/mounter
+		cmd/kubectl
+#		cmd/gendocs
+#		cmd/genkubedocs
+#		cmd/genman
+#		cmd/genyaml
+#		cmd/genswaggertypedocs
+#		cmd/linkcheck
+#		vendor/github.com/onsi/ginkgo/ginkgo
+#		test/e2e/e2e.test
+#		cmd/kubemark
+#		vendor/github.com/onsi/ginkgo/ginkgo
+#		test/e2e_node/e2e_node.test
 	)
 	for t in ${targets[@]}
 	do  # if disable CGO, will kubelet: cAdvisor is unsupported in this build
@@ -185,7 +196,7 @@ build(){
 }
 
 build_on_host(){
-	echo "nothing to do"
+	echo "build_on_host: nothing to do"
 }
 
 copy_output(){
@@ -228,7 +239,7 @@ enter_container(){
 
 release(){
 	cd $BASEDIR
-	echo "nothing to do"
+	echo "release: nothing to do"
 }
 
 reset(){

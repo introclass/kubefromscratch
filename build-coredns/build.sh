@@ -5,7 +5,7 @@ ORI_OSTYPE=$OSTYPE
 export OSTYPE=notdetected 
 BASEDIR=`pwd`
 PROJECT_NAME=coredns
-PROJECT_VERSION="v0.9.9"
+PROJECT_VERSION="v1.2.3"
 
 BUILD_IMAGE_DIR=${BASEDIR}/dockerfiles/build-image
 BUILD_IMAGE=${PROJECT_NAME}:build
@@ -54,25 +54,25 @@ prepare_build_image(){
 prepare_modify_scripts(){
 	cd $BASEDIR
 
-	if [ ! -d ${PROJECT_NAME}/vendor/github.com/mholt ];then
-		git clone --depth 1 --single-branch --branch "v0.10.10" https://github.com/mholt/caddy.git ./relies/vendor/github.com/mholt/caddy
-		cp  -r ./relies/vendor/github.com/mholt ${PROJECT_NAME}/vendor/github.com/
-	fi
-	
-	if [ ! -d ${PROJECT_NAME}/vendor/github.com/miekg ];then
-		git clone --depth 1 --single-branch --branch master https://github.com/miekg/dns.git ./relies/vendor/github.com/miekg/dns
-		cp  -r ./relies/vendor/github.com/miekg ${PROJECT_NAME}/vendor/github.com/
-	fi
-	
-	if [ ! -d ${PROJECT_NAME}/vendor/golang.org/x/net ];then
-		cp  -r ./relies/vendor/golang.org/x/net ${PROJECT_NAME}/vendor/golang.org/x/
-	fi
-	
-	if [ -d ${PROJECT_NAME}/vendor/golang.org/x/text ];then
-		# files in repo's vendor path: golang.org/x/text is not enough, replace them
-		rm -rf ${PROJECT_NAME}/vendor/golang.org/x/text   
-	fi
-	cp  -r ./relies/vendor/golang.org/x/text ${PROJECT_NAME}/vendor/golang.org/x/
+#	if [ ! -d ${PROJECT_NAME}/vendor/github.com/mholt ];then
+#		git clone --depth 1 --single-branch --branch "v0.10.10" https://github.com/mholt/caddy.git ./relies/vendor/github.com/mholt/caddy
+#		cp  -r ./relies/vendor/github.com/mholt ${PROJECT_NAME}/vendor/github.com/
+#	fi
+#	
+#	if [ ! -d ${PROJECT_NAME}/vendor/github.com/miekg ];then
+#		git clone --depth 1 --single-branch --branch master https://github.com/miekg/dns.git ./relies/vendor/github.com/miekg/dns
+#		cp  -r ./relies/vendor/github.com/miekg ${PROJECT_NAME}/vendor/github.com/
+#	fi
+#	
+#	if [ ! -d ${PROJECT_NAME}/vendor/golang.org/x/net ];then
+#		cp  -r ./relies/vendor/golang.org/x/net ${PROJECT_NAME}/vendor/golang.org/x/
+#	fi
+#	
+#	if [ -d ${PROJECT_NAME}/vendor/golang.org/x/text ];then
+#		# files in repo's vendor path: golang.org/x/text is not enough, replace them
+#		rm -rf ${PROJECT_NAME}/vendor/golang.org/x/text   
+#	fi
+#	cp  -r ./relies/vendor/golang.org/x/text ${PROJECT_NAME}/vendor/golang.org/x/
 
 	if [[ "$ORI_OSTYPE" == "darwin"* ]];then
 		sed -i "" -e "s@^coredns: check godeps@coredns: @" ${BASEDIR}/${PROJECT_NAME}/Makefile

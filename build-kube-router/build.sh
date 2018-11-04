@@ -5,7 +5,7 @@ ORI_OSTYPE=$OSTYPE
 export OSTYPE=notdetected 
 BASEDIR=`pwd`
 PROJECT_NAME=kube-router
-PROJECT_VERSION="v0.0.17"
+PROJECT_VERSION="v0.2.0"
 
 BUILD_IMAGE_DIR=${BASEDIR}/dockerfiles/build-image
 BUILD_IMAGE=${PROJECT_NAME}:build
@@ -43,7 +43,7 @@ prepare_build_image(){
 	cd $BASEDIR
 	func_docker_image_exist $BUILD_IMAGE
 	if [[ $? == "0" ]];then
-		docker build -t $BUILD_IMAGE $BUILD_IMAGE_DIR
+		func_docker_image_exist $BUILD_IMAGE
 		return
 	fi
 	dd if=/dev/urandom bs=512 count=1 2>/dev/null | LC_ALL=C tr -dc 'A-Za-z0-9' | dd bs=32 count=1 2>/dev/null >${BUILD_IMAGE_DIR}/rsyncd.password
@@ -172,7 +172,7 @@ build(){
 build_on_host(){
 	cd $BASEDIR
 	pushd $BASEDIR/$PROJECT_NAME
-		make gobgp
+#		make gobgp
 	popd
 }
 
@@ -212,13 +212,14 @@ enter_container(){
 }
 
 release(){
-	cd $BASEDIR
-	pushd $BASEDIR/$PROJECT_NAME
-		make container
-		docker rmi ${PROJECT_NAME}:${PROJECT_VERSION}
-		docker tag cloudnativelabs/kube-router-git:HEAD ${PROJECT_NAME}:${PROJECT_VERSION}
-		docker rmi cloudnativelabs/kube-router-git:HEAD
-	popd
+#	cd $BASEDIR
+#	pushd $BASEDIR/$PROJECT_NAME
+#		make container
+#		docker rmi ${PROJECT_NAME}:${PROJECT_VERSION}
+#		docker tag cloudnativelabs/kube-router-git:HEAD ${PROJECT_NAME}:${PROJECT_VERSION}
+#		docker rmi cloudnativelabs/kube-router-git:HEAD
+#	popd
+	echo "release: nothing"
 }
 
 reset(){

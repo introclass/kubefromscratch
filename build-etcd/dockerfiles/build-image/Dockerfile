@@ -5,7 +5,7 @@ RUN apt-get update
 RUN apt-get install rsync -y 
 RUN ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-ENV HOME /go/src/github.com/cloudnativelabs/kube-router
+ENV HOME /go/src/github.com/coreos/etcd
 RUN mkdir -p $HOME
 
 ADD rsyncd.password /

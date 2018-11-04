@@ -5,7 +5,7 @@ ORI_OSTYPE=$OSTYPE
 export OSTYPE=notdetected 
 BASEDIR=`pwd`
 PROJECT_NAME=cni-plugins
-PROJECT_VERSION="v0.6.0"
+PROJECT_VERSION="v0.7.2"
 
 BUILD_IMAGE_DIR=${BASEDIR}/dockerfiles/build-image
 BUILD_IMAGE=${PROJECT_NAME}:build
@@ -166,7 +166,7 @@ build(){
 }
 
 build_on_host(){
-	echo "nothing to do"
+	echo "build_on_host: nothing to do"
 }
 
 copy_output(){
@@ -205,7 +205,7 @@ enter_container(){
 
 release(){
 	cd $BASEDIR
-	echo "nothing to do"
+	echo "release: nothing to do"
 }
 
 reset(){

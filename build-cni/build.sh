@@ -166,7 +166,7 @@ build(){
 }
 
 build_on_host(){
-	echo "nothing to do"
+	echo "build_on_host: nothing"
 }
 
 copy_output(){
@@ -205,7 +205,7 @@ enter_container(){
 
 release(){
 	cd $BASEDIR
-	echo "nothing to do"
+	echo "release: nothing"
 }
 
 reset(){
