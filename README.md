@@ -7,9 +7,18 @@ changedate: 2018/03/15 10:19:05
 
 ---
 
+## 使用方法
+
+这个项目中`部署部分`不再维护，仅继续维护用来编译部署。
+
+推荐用另一个项目中的ansible脚本进行部署：
+
+[kubefromscratch-ansible](https://github.com/introclass/kubefromscratch-ansible)
+
 ## 背景
 
 如果这还可以算作一个项目的话，那么这个项目的前身是很久之前的[HoneyComb][1]。
+
 
 ## 为什么这么原始？
 
