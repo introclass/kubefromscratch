@@ -138,7 +138,7 @@ sync_to_container(){
 	)
 	rsync ${rsync_opts[@]} \
 		--delete --no-perms \
-		--filter='H /.git/' \
+		--filter='+ /.git/' \
 		--filter='- /.make/' \
 		--filter='- /kube-router' \
 		--filter='- /gobgp' \
