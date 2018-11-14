@@ -136,7 +136,7 @@ sync_to_container(){
 	rsync ${rsync_opts[@]} \
 		--delete --no-perms \
 		--filter='+ /staging/**' \
-		--filter='- /.git/' \
+		--filter='+ /.git/' \
 		--filter='- /.make/' \
 		--filter='- /_tmp/' \
 		--filter='- /_output/' \
