@@ -1,4 +1,4 @@
-FROM golang:1.11.2
+FROM golang:1.12.6
 
 RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/' /etc/apt/sources.list
 RUN apt-get update 

@@ -5,7 +5,7 @@ ORI_OSTYPE=$OSTYPE
 export OSTYPE=notdetected 
 BASEDIR=`pwd`
 PROJECT_NAME=etcd
-PROJECT_VERSION="v3.2.24"
+PROJECT_VERSION="v3.3.13"
 
 BUILD_IMAGE_DIR=${BASEDIR}/dockerfiles/build-image
 BUILD_IMAGE=${PROJECT_NAME}:build
@@ -84,6 +84,8 @@ ensure_data_container(){
 			--volume /usr/local/go/pkg/darwin_386_cgo
 			--volume /usr/local/go/pkg/windows_amd64_cgo
 			--volume /usr/local/go/pkg/windows_386_cgo
+			--volume /usr/local/go/mod
+			--volume /usr/local/go/dep
 			--name "${DATA_CONTAINER}"
 			--hostname "${HOSTNAME}"
 			"${BUILD_IMAGE}"
@@ -162,7 +164,7 @@ build(){
 		--rm
 		"${BUILD_IMAGE}"
 	)
-	"${docker_cmd[@]}" /bin/sh -c "./build"
+	"${docker_cmd[@]}" /bin/sh -c "make build"
 }
 
 build_on_host(){
